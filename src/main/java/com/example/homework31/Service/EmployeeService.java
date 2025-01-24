@@ -24,8 +24,8 @@ public class EmployeeService {
         addEmployee("Петров_Владимир",2,35000);
         addEmployee("Егоров_Александр",1,55000);
         addEmployee("Антонов_Вадим",3,48000);
-        addEmployee("Федоренко_Алексей",2,39000);
-        addEmployee("Злобин_Вадим",1,18000);
+      //  addEmployee("Федоренко_Алексей",2,39000);
+        // addEmployee("Злобин_Вадим",1,18000);
     }
 
     public Employee addEmployee (String fullName, int department , int salary){
@@ -54,7 +54,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllEmployee(){
+       initEmployees();
        return new ArrayList<>(employees.values());
-
     }
 }

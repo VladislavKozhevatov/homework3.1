@@ -28,16 +28,17 @@ public class EmploeeServiceTest {
     }
 
     @Test
-    public void getAllEmployee(){
+    public void getAllEmployees(){
 
         //создаем тестовые данные
-        final Employee employee1 = new Employee("Сырников Вячеслав Петрович",2,35000);
-        final Employee employee2 = new Employee("Белкина Валентина Александровна>",1,39000);
-        final Employee employee3 = new Employee("Дергач Антон Павлович",3,50000);
 
+
+        final Employee employee1 = new Employee("Петров_Владимир",2,35000);
+        final Employee employee2 = new Employee("Егоров_Александр",1,55000);
+        final Employee employee3 = new Employee("Антонов_Вадим",3,48000);
 
         //создаем список expected и заполняем его данными нашего метода
-        List<Employee> expected = employeeService.getAllEmployee();
+         List<Employee> expected = employeeService.getAllEmployee();
 
         //создаем список actual в него помещаем данные для сравнения
         //то что мы предпологиаем метод должен вернуть
@@ -48,7 +49,7 @@ public class EmploeeServiceTest {
         actual.add(employee3);
 
         ////запускаем тест, в случае если список expected и actual не будут равны
-        //    //тест будет провален, о результатах теста читаем в консоли
+        ////тест будет провален, о результатах теста читаем в консоли
         Assertions.assertEquals(expected,actual);
     }
 
@@ -72,10 +73,10 @@ public class EmploeeServiceTest {
         Employee employeeToFind = new Employee("Сырников Вячеслав Петрович",2,35000);
 
         //when
-        Employee foundEmplyee = employeeService.findEmployee(employeeToFind.getFullName());
+        Employee foundEmployee = employeeService.findEmployee(employeeToFind.getFullName());
 
         //then
-        Assertions.assertEquals(employeeToFind,foundEmplyee);
+        Assertions.assertEquals(employeeToFind,foundEmployee);
     }
 
 

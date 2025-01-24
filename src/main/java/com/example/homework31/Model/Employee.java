@@ -1,6 +1,8 @@
 package com.example.homework31.Model;
 
 
+import java.util.Objects;
+
 public class Employee {
    private String fullName;
    private Integer department;
@@ -34,6 +36,19 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return salary == employee.salary && Objects.equals(fullName, employee.fullName) && Objects.equals(department, employee.department);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fullName, department, salary);
     }
 
     @Override
