@@ -4,10 +4,7 @@ import com.example.homework31.Model.Employee;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -16,7 +13,7 @@ public class EmployeeService {
     Map<String,Employee> employees;
 
     public EmployeeService() {
-        this.employees = new HashMap<>();
+        this.employees = new LinkedHashMap<>();
     }
 
     @PostConstruct
@@ -24,8 +21,7 @@ public class EmployeeService {
         addEmployee("Петров_Владимир",2,35000);
         addEmployee("Егоров_Александр",1,55000);
         addEmployee("Антонов_Вадим",3,48000);
-      //  addEmployee("Федоренко_Алексей",2,39000);
-        // addEmployee("Злобин_Вадим",1,18000);
+
     }
 
     public Employee addEmployee (String fullName, int department , int salary){
@@ -39,9 +35,9 @@ public class EmployeeService {
 
     public Employee findEmployee(String fullName) {
         Employee employee = employees.get(fullName);
-        if (employee == null) {
-            throw new IllegalArgumentException("Сотрудника с таким именем нет");
-        }
+//        if (employee == null) {
+//            throw new IllegalArgumentException("Сотрудника с таким именем нет");
+//        }
         return employee;
     }
 
@@ -57,4 +53,9 @@ public class EmployeeService {
        initEmployees();
        return new ArrayList<>(employees.values());
     }
+
+//    public Map<String, Employee> getAllEmployee(){
+//        return new HashMap<>(employees);
+//    }
+
 }

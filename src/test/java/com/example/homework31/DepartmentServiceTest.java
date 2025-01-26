@@ -11,10 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceTest {
@@ -26,11 +23,18 @@ public class DepartmentServiceTest {
     @InjectMocks
     private DepartmentService departmentService;
 
-    private final Map<String, Employee> employees = new HashMap<>(){{
-        put("СырниковАнтон",new Employee("СырниковАнтон",1,20000));
-        put("СырниковАнтон1",new Employee("СырниковАнтон1",1,30000));
-        put("СырниковАнтон2",new Employee("СырниковАнтон2",1,40000));
-    }};
+
+//    private final Map<String, Employee> employees = new HashMap<>(){{
+//        put("СырниковАнтон",new Employee("СырниковАнтон",1,20000));
+//        put("СырниковАнтон1",new Employee("СырниковАнтон1",1,30000));
+//        put("СырниковАнтон2",new Employee("СырниковАнтон2",1,40000));
+//    }};
+
+    private final List<Employee> employees = new ArrayList<>(){
+        Employee employee1 = new Employee("СырниковАнтон",1,20000);
+        Employee employee2 = new Employee("СырниковАнтон1",1,30000);
+        Employee employee3 = new Employee("СырниковАнтон2",1,40000);
+    };
 
     @Test
     public void shouldCorrectlyCalculateSalarySum(){
@@ -38,7 +42,12 @@ public class DepartmentServiceTest {
         int departmentId =1;
         int expectedSum = 90000;
 
-        Mockito.when(employeeService.getAllEmployee()).thenReturn((List<Employee>) employees);
+        employeeService.addEmployee("СырниковАнтон",1,20000);
+        employeeService.addEmployee("СырниковАнтон1",1,30000);
+        employeeService.addEmployee("СырниковАнтон2",1,40000);
+
+
+        Mockito.when(employeeService.getAllEmployee()).thenReturn(employees);
         //when
         int actualSum = departmentService.getSumSalariesByDep(departmentId);
 
@@ -51,9 +60,9 @@ public class DepartmentServiceTest {
     public void shouldCorrectlyFindEmployeeWithMinSalary(){
         //given
         int departmentId =1;
-        Employee expectedMinSalaryByDep = employees.get("СырниковАнтон");
+        Employee expectedMinSalaryByDep = employees.get(1);
 
-        Mockito.when(employeeService.getAllEmployee()).thenReturn((List<Employee>) employees);
+        Mockito.when(employeeService.getAllEmployee()).thenReturn(employees);
         //when
         Integer actualMinSalaryBydep = departmentService.getMinSalaryInDep(departmentId);
 
@@ -66,9 +75,9 @@ public class DepartmentServiceTest {
     public void shouldCorrectlyFindEmployeeWithMaxSalary(){
         //given
         int departmentId =1;
-        Employee expectedMaxSalaryByDep = employees.get("СырниковАнтон2");
+        Employee expectedMaxSalaryByDep = employees.get(departmentId);
 
-        Mockito.when(employeeService.getAllEmployee()).thenReturn((List<Employee>) employees);
+        Mockito.when(employeeService.getAllEmployee()).thenReturn(employees);
         //when
         Integer actualMaxSalaryByDep = departmentService.getMaxSalaryInDep(departmentId);
 

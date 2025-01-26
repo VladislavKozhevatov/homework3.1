@@ -23,8 +23,9 @@ public class EmploeeServiceTest {
 
     @BeforeEach
     public void setUp(){
-
-
+        final Employee employee1 = new Employee("Петров_Владимир",2,35000);
+        final Employee employee2 = new Employee("Егоров_Александр",1,55000);
+        final Employee employee3 = new Employee("Антонов_Вадим",3,48000);
     }
 
     @Test
@@ -69,8 +70,9 @@ public class EmploeeServiceTest {
 
     @Test
     public void findEmployee(){
+
         //given
-        Employee employeeToFind = new Employee("Сырников Вячеслав Петрович",2,35000);
+        Employee employeeToFind = employeeService.addEmployee("Петров_Владимир",2,35000);
 
         //when
         Employee foundEmployee = employeeService.findEmployee(employeeToFind.getFullName());
@@ -83,8 +85,8 @@ public class EmploeeServiceTest {
     @Test
     public void removeEmployee(){
         //given
-        Employee employeeToRemove = new Employee("Сырников Вячеслав Петрович",2,35000);
-
+        Employee employeeToRemove = employeeService.addEmployee("Сырников Вячеслав Петрович",2,35000);
+        setUp();
         //when
         Employee removedEmployee = employeeService.delete(employeeToRemove.getFullName());
 

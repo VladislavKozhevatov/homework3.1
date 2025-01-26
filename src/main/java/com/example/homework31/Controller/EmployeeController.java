@@ -29,7 +29,7 @@ public class EmployeeController {
     }
 
      @GetMapping("/remove")
-    public Employee remove(@RequestParam String fullName){ //как сделать проверку что сотрудник существует?
+    public Employee remove(@RequestParam String fullName){
         return employeeService.delete(fullName);
     }
 
