@@ -4,6 +4,7 @@ import com.example.homework31.Model.Employee;
 import com.example.homework31.Service.DepartmentService;
 import com.example.homework31.Service.EmployeeService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,21 +31,20 @@ public class DepartmentServiceTest {
 //        put("СырниковАнтон2",new Employee("СырниковАнтон2",1,40000));
 //    }};
 
-    private final List<Employee> employees = new ArrayList<>(){
-        Employee employee1 = new Employee("СырниковАнтон",1,20000);
-        Employee employee2 = new Employee("СырниковАнтон1",1,30000);
-        Employee employee3 = new Employee("СырниковАнтон2",1,40000);
-    };
+    private final List<Employee> employees = new ArrayList<>();
+
+    @BeforeEach
+    public void setUp(){
+        employees.add(new Employee("Петров_Владимир",2,30000));
+        employees.add(new Employee("Егоров_Александр",1,50000));
+        employees.add(new Employee("Антонов_Вадим",3,40000));
+    }
 
     @Test
     public void shouldCorrectlyCalculateSalarySum(){
         //given
         int departmentId =1;
-        int expectedSum = 90000;
-
-        employeeService.addEmployee("СырниковАнтон",1,20000);
-        employeeService.addEmployee("СырниковАнтон1",1,30000);
-        employeeService.addEmployee("СырниковАнтон2",1,40000);
+        int expectedSum = 50000;
 
 
         Mockito.when(employeeService.getAllEmployee()).thenReturn(employees);
@@ -59,8 +59,8 @@ public class DepartmentServiceTest {
     @Test
     public void shouldCorrectlyFindEmployeeWithMinSalary(){
         //given
-        int departmentId =1;
-        Employee expectedMinSalaryByDep = employees.get(1);
+        int departmentId =2;
+        int expectedMinSalaryByDep = employees.get(0).getSalary();
 
         Mockito.when(employeeService.getAllEmployee()).thenReturn(employees);
         //when
@@ -75,7 +75,7 @@ public class DepartmentServiceTest {
     public void shouldCorrectlyFindEmployeeWithMaxSalary(){
         //given
         int departmentId =1;
-        Employee expectedMaxSalaryByDep = employees.get(departmentId);
+        int expectedMaxSalaryByDep = employees.get(1).getSalary();
 
         Mockito.when(employeeService.getAllEmployee()).thenReturn(employees);
         //when
@@ -85,19 +85,22 @@ public class DepartmentServiceTest {
         Assertions.assertEquals(expectedMaxSalaryByDep,actualMaxSalaryByDep);
     }
 
-//    @Test
-//    public void shouldCorrectlyFindEmployeesByDepartmentId(){
-//        //given
-//        int departmentId =1;
-//        List<Employee> expectedEmployee = (List<Employee>) employees.values();
-//
-//        Mockito.when(employeeService.getAllEmployee()).thenReturn((List<Employee>) employees);
-//        //when
-//        List<Employee> actualEmployees = departmentService.getAllEmployeesByDepartments(departmentId);
-//
-//        //then
-//        Assertions.assertEquals(expectedEmployee,actualEmployees);
-//    }
+    @Test
+    public void shouldCorrectlyFindEmployeesByDepartmentId(){
+        //given
+
+        Map<Integer,List<Employee>> expectedEmployee = new HashMap<>();
+        expectedEmployee.put(1,new ArrayList<>(List.of(employees.get(1))));
+        expectedEmployee.put(2,new ArrayList<>(List.of(employees.get(0))));
+        expectedEmployee.put(3,new ArrayList<>(List.of(employees.get(2))));
+
+        Mockito.when(employeeService.getAllEmployee()).thenReturn(employees);
+        //when
+        Map<Integer, List<Employee>> actualEmployees = departmentService.getAllEmployeesByDepartments();
+
+        //then
+        Assertions.assertEquals(expectedEmployee,actualEmployees);
+    }
 
 
 }

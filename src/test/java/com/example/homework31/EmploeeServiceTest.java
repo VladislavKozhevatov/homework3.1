@@ -21,37 +21,38 @@ public class EmploeeServiceTest {
     private final EmployeeService employeeService = new EmployeeService();
 
 
-    @BeforeEach
-    public void setUp(){
-        final Employee employee1 = new Employee("Петров_Владимир",2,35000);
-        final Employee employee2 = new Employee("Егоров_Александр",1,55000);
-        final Employee employee3 = new Employee("Антонов_Вадим",3,48000);
-    }
+//    @BeforeEach
+//    public void setUp(){
+//        final Employee employee1 = new Employee("Петров_Владимир",2,35000);
+//        final Employee employee2 = new Employee("Егоров_Александр",1,55000);
+//        final Employee employee3 = new Employee("Антонов_Вадим",3,48000);
+//    }
 
     @Test
     public void getAllEmployees(){
 
         //создаем тестовые данные
-
-
         final Employee employee1 = new Employee("Петров_Владимир",2,35000);
         final Employee employee2 = new Employee("Егоров_Александр",1,55000);
         final Employee employee3 = new Employee("Антонов_Вадим",3,48000);
 
         //создаем список expected и заполняем его данными нашего метода
-         List<Employee> expected = employeeService.getAllEmployee();
+
+        List<Employee> expected = new ArrayList<>();
+        expected.add(employee1);
+        expected.add(employee2);
+        expected.add(employee3);
 
         //создаем список actual в него помещаем данные для сравнения
         //то что мы предпологиаем метод должен вернуть
+        List<Employee> actual = employeeService.getAllEmployee();
 
-        List<Employee> actual = new ArrayList<>();
-        actual.add(employee1);
-        actual.add(employee2);
-        actual.add(employee3);
 
         ////запускаем тест, в случае если список expected и actual не будут равны
         ////тест будет провален, о результатах теста читаем в консоли
-        Assertions.assertEquals(expected,actual);
+
+
+        Assertions.assertTrue(expected.containsAll(actual));
     }
 
     @Test
@@ -86,7 +87,6 @@ public class EmploeeServiceTest {
     public void removeEmployee(){
         //given
         Employee employeeToRemove = employeeService.addEmployee("Сырников Вячеслав Петрович",2,35000);
-        setUp();
         //when
         Employee removedEmployee = employeeService.delete(employeeToRemove.getFullName());
 

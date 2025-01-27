@@ -13,7 +13,7 @@ public class EmployeeService {
     Map<String,Employee> employees;
 
     public EmployeeService() {
-        this.employees = new LinkedHashMap<>();
+        this.employees = new HashMap<>();
     }
 
     @PostConstruct
@@ -23,6 +23,7 @@ public class EmployeeService {
         addEmployee("Антонов_Вадим",3,48000);
 
     }
+
 
     public Employee addEmployee (String fullName, int department , int salary){
         if (employees.containsKey(fullName)){
