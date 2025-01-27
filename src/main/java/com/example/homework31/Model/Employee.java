@@ -4,9 +4,9 @@ package com.example.homework31.Model;
 import java.util.Objects;
 
 public class Employee {
-   private String fullName;
-   private Integer department;
-   private int salary;
+    private String fullName;
+    private Integer department;
+    private int salary;
 
     public Employee(String fullName, Integer department, int salary) {
         this.fullName = fullName;
@@ -59,7 +59,4 @@ public class Employee {
                 ", salary=" + salary +
                 '}';
     }
-
-
-
 }

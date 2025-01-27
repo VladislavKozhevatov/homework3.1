@@ -24,13 +24,6 @@ public class DepartmentServiceTest {
     @InjectMocks
     private DepartmentService departmentService;
 
-
-//    private final Map<String, Employee> employees = new HashMap<>(){{
-//        put("СырниковАнтон",new Employee("СырниковАнтон",1,20000));
-//        put("СырниковАнтон1",new Employee("СырниковАнтон1",1,30000));
-//        put("СырниковАнтон2",new Employee("СырниковАнтон2",1,40000));
-//    }};
-
     private final List<Employee> employees = new ArrayList<>();
 
     @BeforeEach
@@ -101,6 +94,4 @@ public class DepartmentServiceTest {
         //then
         Assertions.assertEquals(expectedEmployee,actualEmployees);
     }
-
-
 }
